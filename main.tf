@@ -4,12 +4,7 @@
 
 resource "aws_instance" "webserver" {
   ami             = "ami-0bc8ae3ec8e338cbc"
-  instance_type   = "t2.micro"
-  key_name        = "kenopsy.pem"
- 
-
- 
-  
+  instance_type   = "t2.micro" 
 
 }
 
