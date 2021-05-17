@@ -14,7 +14,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "webserver" {
-  ami             = "${data.aws_ami.ubuntu.id}"//ami-0bc8ae3ec8e338cbc
+  ami             = "ami-0bc8ae3ec8e338cbc"
   instance_type   = "${var.instance_type}"
   
   vpc_security_group_ids = [ "${aws_security_group.instance.id}" ]
