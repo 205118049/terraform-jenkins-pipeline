@@ -14,12 +14,26 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "webserver" {
-  ami             = "ami-0bc8ae3ec8e338cbc"
-  instance_type   = "t2.micro"
-  
-  
+  ami             = "${data.aws_ami.ubuntu.id}"
+  instance_type   = "${var.instance_type}"
+  key_name        = "${var.key_name}"
+  vpc_security_group_ids = [ "${aws_security_group.instance.id}" ]
+  user_data       = "${file("userdata.sh")}"
+  lifecycle {
+    create_before_destroy = true
+  }
 
-  
+  provisioner "file" {
+    source      = "upload/index.html"
+    destination = "/tmp/index.html"
+    connection {
+      host = "${aws_instance.webserver.public_ip}"
+      type     = "ssh"
+      user     = "ubuntu"
+      private_key = "${file("kenopsy.pem")}"
+      timeout = "2m"
+    }
+  }
 
 }
 
