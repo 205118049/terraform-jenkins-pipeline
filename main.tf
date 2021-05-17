@@ -15,7 +15,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "webserver" {
   ami             = "ami-0bc8ae3ec8e338cbc"
-  instance_type   = "${var.instance_type}"
+  instance_type   = "t2.micro"
   
   vpc_security_group_ids = [ "${aws_security_group.instance.id}" ]
   user_data       = "${file("userdata.sh")}"
