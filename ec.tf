@@ -1,9 +1,12 @@
-resource "aws_instance" "web-server-instance" {
-  ami               = var.image
-  instance_type     = "t2.micro"
-  availability_zone = "us-east-1a"
+
+
+//creating aws instance
+
+resource "aws_instance" "web-instance" {
+  ami           = "ami-0bc8ae3ec8e338cbc" # ap-northeast-1
+  instance_type = "t2.micro"
 
   tags = {
-    Name = "web-server"
+    Name = "ubuntu"
   }
 }
