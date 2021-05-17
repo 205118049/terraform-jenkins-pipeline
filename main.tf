@@ -1,17 +1,6 @@
 # This stack assumes that a Default VPC is present
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  filter {
-    name = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20151015"]
-  }
-  filter {
-    name = "virtualization-type"
-    values = ["hvm"]
-  }
-  owners = ["099720109477"] # Canonical
-}
+
 
 resource "aws_instance" "webserver" {
   ami             = "ami-0bc8ae3ec8e338cbc"
@@ -19,17 +8,8 @@ resource "aws_instance" "webserver" {
   key_name        = "kenopsy.pem"
  
 
-  provisioner "file" {
-    source      = "upload/index.html"
-    destination = "/tmp/index.html"
-    connection {
-      host = "${aws_instance.webserver.public_ip}"
-      type     = "ssh"
-      user     = "ubuntu"
-      private_key = "${file("kenopsy.pem")}"
-      timeout = "2m"
-    }
-  }
+ 
+  
 
 }
 
