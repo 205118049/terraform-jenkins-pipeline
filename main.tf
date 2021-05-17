@@ -14,14 +14,10 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "webserver" {
-  ami             = "${data.aws_ami.ubuntu.id}"
-  instance_type   = "${var.instance_type}"
-  key_name        = "${var.key_name}"
-  vpc_security_group_ids = [ "${aws_security_group.instance.id}" ]
-  user_data       = "${file("userdata.sh")}"
-  lifecycle {
-    create_before_destroy = true
-  }
+  ami             = "ami-0bc8ae3ec8e338cbc"
+  instance_type   = "t2.micro"
+  key_name        = "kenopsy.pem"
+ 
 
   provisioner "file" {
     source      = "upload/index.html"
