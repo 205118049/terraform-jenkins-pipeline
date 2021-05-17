@@ -7,6 +7,6 @@ resource "aws_instance" "web-instance" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "ubuntu"
+    Name = "web-server"
   }
 }
