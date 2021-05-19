@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "webserver" {
   ami             = "${data.aws_ami.ubuntu.id}"
   instance_type   = "${var.instance_type}"
-  //key_name        = "${var.key_name}"
+  key_name        = "${var.key_name}"
   vpc_security_group_ids = [ "${aws_security_group.instance.id}" ]
   user_data       = "${file("userdata.sh")}"
   lifecycle {
@@ -32,6 +32,13 @@ resource "aws_instance" "webserver" {
       type     = "ssh"
       user     = "ubuntu"
       //private_key = "${file("kenopsy.pem")}"
+      variable "ssh_private_key_file" {
+  default = "files/kenopsy.pem"
+}
+
+locals {
+  ssh_private_key_content = file(var.ssh_private_key_file)
+}
      
       timeout = "2m"
     }
