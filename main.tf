@@ -33,7 +33,7 @@ resource "aws_instance" "webserver" {
       user     = "ubuntu"
       //private_key = "${file("kenopsy.pem")}"
       variable "ssh_private_key_file" {
-  default = "files/kenopsy.pem"
+  default = "files/naya.pem"
 }
 
 locals {

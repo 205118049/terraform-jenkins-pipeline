@@ -25,7 +25,7 @@ withCredentials([sshUserPrivateKey(
     credentialsId: 'token',
     keyFileVariable: 'SSH_KEY')])
 {
-    sh 'cp "$SSH_KEY" files/kenopsy.pem'
+    sh 'cp "$SSH_KEY" files/naya.pem'
     //sh 'terraform plan -out tfplan'
 }
   stage ('Terraform Plan') { 
