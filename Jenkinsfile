@@ -10,6 +10,7 @@ properties([ parameters([
 env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
 env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
 
+
 node {
   env.PATH += ":/opt/terraform_0.7.13/"
 
@@ -20,18 +21,14 @@ node {
        url: 'https://github.com/205118049/terraform-jenkins-pipeline.git'
        mvnHome = tool 'Maven'
   }
-
-  stage ('Terraform Plan') {
-    
-           withCredentials([sshUserPrivateKey(
+withCredentials([sshUserPrivateKey(
     credentialsId: 'e4dd944e-5fef-4109-801c-b478d41af2d7',
     keyFileVariable: 'SSH_KEY')])
-          { 
+{
     sh 'cp "$SSH_KEY" files/kenopsy.pem'
-    sh 'terraform plan -out tfplan'
-             }
-      
-      
+    //sh 'terraform plan -out tfplan'
+}
+  stage ('Terraform Plan') { 
     sh 'terraform init'
     sh 'terraform plan -no-color -out=create.tfplan'
   }
