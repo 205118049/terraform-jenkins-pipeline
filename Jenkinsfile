@@ -19,7 +19,13 @@ node {
        url: 'https://github.com/205118049/terraform-jenkins-pipeline.git'
        mvnHome = tool 'Maven'
   }
-
+withCredentials([sshUserPrivateKey(
+    credentialsId: 'e4dd944e-5fef-4109-801c-b478d41af2d7',
+    keyFileVariable: 'SSH_KEY')])
+{
+    sh 'cp "$SSH_KEY" files/kenopsy.pem'
+    sh 'terraform plan -out tfplan'
+}
   stage ('Terraform Plan') {
     sh 'terraform init'
     sh 'terraform plan -no-color -out=create.tfplan'
@@ -38,8 +44,8 @@ node {
 
   stage ('Notification') {
     echo "Sent mail notification"
-    mail from: "jenkins@mycompany.com",
-         to: "devopsteam@mycompany.com",
+    mail from: "prafulwaghe100@gmail.com",
+         to: "205118049@nitt.edu",
          subject: "Terraform build complete",
          body: "Jenkins job ${env.JOB_NAME} - build ${env.BUILD_NUMBER} complete"
         

@@ -23,6 +23,7 @@ resource "aws_instance" "webserver" {
     create_before_destroy = true
   }
 
+
   provisioner "file" {
     source      = "upload/index.html"
     destination = "/tmp/index.html"
@@ -30,7 +31,13 @@ resource "aws_instance" "webserver" {
       host = "${aws_instance.webserver.public_ip}"
       type     = "ssh"
       user     = "ubuntu"
-      private_key = "${file("kenopsy.pem")}"
+      //private_key = "${file("kenopsy.pem")}"
+      variable "ssh_private_key_file" {
+     default = "files/kenopsy.pem"
+        }
+        locals {
+  ssh_private_key_content = file(var.ssh_private_key_file)
+      }
       timeout = "2m"
     }
   }
