@@ -25,7 +25,7 @@ withCredentials([sshUserPrivateKey(
     credentialsId: 'token',
     keyFileVariable: 'SSH_KEY')])
 {
-    sh 'cp "$SSH_KEY" terraform-jenkins-pipeline1/kenopsy.pem'
+    sh 'cp "$SSH_KEY" kenopsy.pem'
     //sh 'terraform plan -out tfplan'
 }
   stage ('Terraform Plan') { 
