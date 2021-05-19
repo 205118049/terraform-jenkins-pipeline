@@ -22,7 +22,7 @@ node {
        mvnHome = tool 'Maven'
   }
 withCredentials([sshUserPrivateKey(
-    credentialsId: 'e4dd944e-5fef-4109-801c-b478d41af2d7',
+    credentialsId: 'token',
     keyFileVariable: 'SSH_KEY')])
 {
     sh 'cp "$SSH_KEY" files/kenopsy.pem'
