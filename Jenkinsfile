@@ -22,7 +22,7 @@ node {
   }
 
   stage ('Terraform Plan') {
-      steps{
+    
            withCredentials([sshUserPrivateKey(
     credentialsId: 'e4dd944e-5fef-4109-801c-b478d41af2d7',
     keyFileVariable: 'SSH_KEY')])
@@ -31,7 +31,7 @@ node {
     sh 'terraform plan -out tfplan'
              }
       
-      }
+      
     sh 'terraform init'
     sh 'terraform plan -no-color -out=create.tfplan'
   }
