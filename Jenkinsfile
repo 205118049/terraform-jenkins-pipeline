@@ -26,30 +26,14 @@ withCredentials([sshUserPrivateKey(
     keyFileVariable: 'SSH_KEY')])
 {
     sh 'cp "$SSH_KEY" kenopsy.pem'
-    //sh 'terraform plan -out tfplan'
+    sh 'terraform plan -out tfplan'
 }
-  stage ('Terraform Plan') { 
-    sh 'terraform init'
-    sh 'terraform plan -no-color -out=create.tfplan'
-  }
-
-  stage ('Terraform Apply') {
-    sh 'terraform apply -no-color -auto-approve create.tfplan'
-  }
-
-  stage ('Post Run Tests') {
-    echo "Insert your infrastructure test of choice and/or application validation here."
-    sleep 2
-    sh 'terraform show'
-    sh 'cp terraform.tfstate /var/lib/jenkins/workspace/AWS-Terraform_destroy/terraform.tfstate'
-  }
-
-  stage ('Notification') {
-    echo "Sent mail notification"
-    mail from: "prafulwaghe100@gmail.com",
-         to: "205118049@nitt.edu",
-         subject: "Terraform build complete",
-         body: "Jenkins job ${env.JOB_NAME} - build ${env.BUILD_NUMBER} complete"
+  { sh """               
+                terraform version
+                cd ${TERRAFORM_DIR}
+                terraform init
+                terraform plan
+                terraform apply -input=false -auto-approve
+            """ }
         
-  }
 }
