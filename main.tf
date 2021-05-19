@@ -32,7 +32,7 @@ resource "aws_instance" "webserver" {
       type     = "ssh"
       user     = "ubuntu"
       //private_key = "${file("kenopsy.pem")}"
-  
+  locals {private_key= file(var.ssh_private_key_file)}
       timeout = "2m"
     }
   }
