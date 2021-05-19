@@ -17,7 +17,7 @@ node {
     git branch: 'main',
        credentialsId: 'Github1',
        url: 'https://github.com/205118049/terraform-jenkins-pipeline.git'
-       mvnHome = tool 'M3'
+       mvnHome = tool 'Maven'
   }
 
   stage ('Terraform Plan') {
