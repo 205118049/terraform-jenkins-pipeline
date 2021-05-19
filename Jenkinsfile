@@ -31,9 +31,7 @@ withCredentials([sshUserPrivateKey(
   
 
   stage ('All') {
-  sh """               
-                terraform version
-                cd ${TERRAFORM_DIR}
+  sh """         
                 terraform init
                 terraform plan
                 terraform apply -input=false -auto-approve
