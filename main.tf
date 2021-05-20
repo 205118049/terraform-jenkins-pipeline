@@ -30,11 +30,10 @@ resource "aws_instance" "webserver" {
     connection {
       host = "${aws_instance.webserver.public_ip}"
       type     = "ssh"
-      user     = "ubuntu"
+      user     = "praful"
       //private_key = "${file("kenopsy.pem")}"
     // private_key= "${file(var.ssh_private_key_file)}"
-    variable "ssh_private_key_file" { default = "*/kenopsy.pem"}
-     private_key = "${file(var.ssh_private_key_file)}"
+    
       timeout = "2m"
     }
   }
