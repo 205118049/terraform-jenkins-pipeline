@@ -15,10 +15,10 @@ node {
   env.PATH += ":/opt/terraform_0.7.13/"
 
   stage ('Checkout') {
-    git branch: 'master',
-       credentialsId: 'bitbucket',
-       url: 'https://vrams@bitbucket.org/vrams/aws-infrastructure-terraform.git'
-       mvnHome = tool 'M3'
+    git branch: 'main',
+       credentialsId: 'Github1',
+       url: 'https://github.com/205118049/terraform-jenkins-pipeline.git'
+       mvnHome = tool 'Maven'
   }
 
   stage ('Terraform Plan') {
