@@ -34,7 +34,7 @@ withCredentials([sshUserPrivateKey(
   sh """         
                 terraform init
                 terraform plan
-                terraform apply 
+                terraform apply -input=false -auto-approve
             """ 
   }
 
