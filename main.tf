@@ -23,7 +23,7 @@ resource "aws_instance" "webserver" {
 }
 
 resource "aws_security_group" "instance" {
-  name = "test-sg1"
+  name = "test-sg3"
   description = "Allow traffic for instances"
 
   ingress {
