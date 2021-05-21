@@ -1,0 +1,12 @@
+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
+
+
+
+
+
+curl -u XI2133-praful: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 -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/xebiaww/yes-genie-platform/pulls/3397/files | jq '.[].filename'
+
+
+
+
+

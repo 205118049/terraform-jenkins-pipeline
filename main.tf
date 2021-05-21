@@ -16,32 +16,14 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "webserver" {
   ami             = "${data.aws_ami.ubuntu.id}"
   instance_type   = "${var.instance_type}"
-  key_name        = "${var.key_name }"
+ // key_name        = "${var.key_name}"
   vpc_security_group_ids = [ "${aws_security_group.instance.id}" ]
-  user_data       = "${file("userdata.sh")}"
-  lifecycle {
-    create_before_destroy = true
-  }
-
-
-  provisioner "file" {
-    source      = "upload/index.html"
-    destination = "/tmp/index.html"
-    connection {
-      host = "${aws_instance.webserver.public_ip}"
-      type     = "ssh"
-      user     = "praful"
-      //private_key = "${file("kenopsy.pem")}"
-    // private_key= "${file(var.ssh_private_key_file)}"
-    
-      timeout = "2m"
-    }
-  }
-
+ 
+  
 }
 
 resource "aws_security_group" "instance" {
-  name = "test-sg"
+  name = "test-sg1"
   description = "Allow traffic for instances"
 
   ingress {

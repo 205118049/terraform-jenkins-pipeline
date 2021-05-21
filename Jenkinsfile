@@ -1,9 +1,13 @@
 #!groovy
+//aws_access_key_id = AKIAWI2J3LXEHXMY5TUN
+//aws_secret_access_key = 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
+
+
 
 // Build Parameters
 properties([ parameters([
-  string( name: 'AWS_ACCESS_KEY_ID', defaultValue: 'AKIAWI2J3LXEHXMY5TUN'),
-  string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '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')
+  string( name: 'AWS_ACCESS_KEY_ID', defaultValue: 'AKIAWI2J3LXECHHTRT43'),
+  string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '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')
 ]), pipelineTriggers([]) ])
 
 
